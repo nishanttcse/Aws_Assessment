@@ -1,0 +1,6 @@
+# Local files
+*.tfstate
+*.tfstate.*
+.terraform
+*.zip
+*.pem
