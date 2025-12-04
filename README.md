@@ -7,6 +7,3 @@ This repository contains Terraform templates, scripts, and documentation to comp
 4. Billing & Free Tier Cost Monitoring (CloudWatch Alarm / Budget)
 5. Architecture Diagram (PNG)
 
-**Important:** I cannot access or create resources in your AWS account. This repository provides working Terraform code, user-data scripts, draw.io-compatible architecture diagram (PNG), and step-by-step instructions so you can run everything in your own AWS Free Tier account, capture screenshots required for submission, and then destroy the resources.
-
-See each folder for per-task README, Terraform files, and scripts.
