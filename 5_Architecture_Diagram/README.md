@@ -1,13 +1,5 @@
-# Task 5 — Architecture Diagram
+The architecture is designed to support high scalability, high availability, and secure handling of up to 10,000 concurrent users using a multi-tier AWS design. Traffic first enters an Application Load Balancer (ALB) deployed in public subnets, which distributes incoming requests across multiple EC2 instances running inside an Auto Scaling Group (ASG) located in private subnets. The ASG automatically scales out or in based on CPU usage, request count, or latency to ensure consistent performance during peak load.
 
-**Brief explanation (5–8 lines)**:
-Design targets 10,000 concurrent users:
-- Internet-facing ALB terminates TLS and distributes traffic to an Auto Scaling group of web servers in private subnets across multiple AZs.
-- Auto Scaling group scales based on request metrics (ALB request count / target CPU).
-- Web tier communicates with a managed RDS/Aurora cluster in private subnets; read replicas for scaling reads.
-- ElastiCache (Redis) is used for session caching, rate-limiting, and fast lookups.
-- Security Groups and NACLs control ingress/egress; WAF is placed in front of ALB for protection.
-- Observability via CloudWatch (metrics, logs), X-Ray for tracing, and centralised S3 for logs/CFN templates.
+The application layer communicates with a multi-AZ Amazon RDS/Aurora database, ensuring reliability and fault tolerance at the data layer. To reduce load on the database and improve response times, Amazon ElastiCache (Redis) is integrated for caching frequently accessed data and session storage. Security is maintained through Security Groups, NACLs, and an optional AWS WAF that filters malicious traffic at the ALB level.
 
-You will find `architecture.png` in this folder — you can include it in your submission or import it into draw.io as a background reference.
-
+All components are monitored using Amazon CloudWatch, logging key metrics, alarms, and application logs. S3 is used for storing logs or static assets, and NAT Gateway enables secure outbound access for private instances. The architecture is fully distributed across multiple Availability Zones, ensuring continuous availability even during failures.
